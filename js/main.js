@@ -237,6 +237,99 @@
     });
   }
 
+  /* ── Selector de fecha (ruedas deslizables) → WhatsApp ── */
+  (function () {
+    var form = $('#fecha'); if (!form) return;
+    form.hidden = false; $('#agendaBtn').hidden = true;
+    var H = 44;
+    var MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    var DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+    var now = new Date(); now.setHours(0, 0, 0, 0);
+    var startYear = now.getFullYear();
+    var years = [0, 1, 2, 3].map(function (i) { return startYear + i; });
+    var def = new Date(now.getFullYear(), now.getMonth() + 6, 15); // por defecto: en ~6 meses
+    var st = { d: def.getDate(), m: def.getMonth(), y: def.getFullYear(), tipo: 'xv' };
+    var wD = $('#wDay'), wM = $('#wMonth'), wY = $('#wYear');
+    var smooth = reduced ? 'auto' : 'smooth';
+
+    function fill(w, labels) {
+      w.innerHTML = '';
+      labels.forEach(function (t, i) {
+        var o = document.createElement('div');
+        o.setAttribute('role', 'option'); o.textContent = t;
+        o.addEventListener('click', function () { w.scrollTo({ top: i * H, behavior: smooth }); });
+        w.appendChild(o);
+      });
+    }
+    function mark(w, i) {
+      var items = w.children;
+      for (var k = 0; k < items.length; k++) {
+        var on = k === i; items[k].classList.toggle('is-sel', on); items[k].setAttribute('aria-selected', on);
+      }
+    }
+    function daysIn(m, y) { return new Date(y, m + 1, 0).getDate(); }
+    function buildDays() {
+      var n = daysIn(st.m, st.y);
+      if (st.d > n) st.d = n;
+      var arr = []; for (var i = 1; i <= n; i++) arr.push(i);
+      fill(wD, arr);
+      wD.scrollTop = (st.d - 1) * H; mark(wD, st.d - 1);
+    }
+    function summary() {
+      var dt = new Date(st.y, st.m, st.d);
+      var past = dt < now;
+      var txt = DIAS[dt.getDay()] + ' ' + st.d + ' de ' + MESES[st.m] + ' de ' + st.y;
+      $('#fechaSum').textContent = past ? 'Elegí una fecha futura' : txt;
+      var go = $('#fechaGo');
+      go.setAttribute('aria-disabled', past);
+      go.style.opacity = past ? '.35' : '';
+      go.style.pointerEvents = past ? 'none' : '';
+      var city = $('#fechaCity').value.trim() || 'a confirmar';
+      var msg = (CFG.mensajes[st.tipo] || CFG.mensajes.general)
+        .replace('Fecha: __', 'Fecha: ' + txt + '.')
+        .replace('Ciudad: __', 'Ciudad: ' + city);
+      go.href = 'https://wa.me/' + CFG.whatsapp + '?text=' + encodeURIComponent(msg);
+    }
+    // Lee la fila centrada al detenerse el scroll
+    function watch(w, onPick) {
+      var raf = 0;
+      w.addEventListener('scroll', function () {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(function () {
+          var i = Math.max(0, Math.min(w.children.length - 1, Math.round(w.scrollTop / H)));
+          mark(w, i); onPick(i);
+        });
+      }, { passive: true });
+      w.addEventListener('keydown', function (e) {
+        var cur = Math.round(w.scrollTop / H), d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
+        if (d) { e.preventDefault(); w.scrollTo({ top: Math.max(0, Math.min(w.children.length - 1, cur + d)) * H, behavior: smooth }); }
+      });
+    }
+    fill(wM, MESES.map(function (m) { return m.charAt(0).toUpperCase() + m.slice(1); }));
+    fill(wY, years);
+    wM.scrollTop = st.m * H; mark(wM, st.m);
+    wY.scrollTop = years.indexOf(st.y) * H; mark(wY, years.indexOf(st.y));
+    buildDays(); summary();
+
+    watch(wD, function (i) { st.d = i + 1; summary(); });
+    watch(wM, function (i) {
+      if (i === st.m) return; st.m = i;
+      var n = daysIn(st.m, st.y); if (st.d > n) st.d = n; buildDays(); summary();
+    });
+    watch(wY, function (i) {
+      if (years[i] === st.y) return; st.y = years[i];
+      var n = daysIn(st.m, st.y); if (st.d > n) st.d = n; buildDays(); summary();
+    });
+    $$('.seg button', form).forEach(function (b) {
+      b.addEventListener('click', function () {
+        st.tipo = b.getAttribute('data-tipo');
+        $$('.seg button', form).forEach(function (x) { var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-checked', on); });
+        summary();
+      });
+    });
+    $('#fechaCity').addEventListener('input', summary);
+  })();
+
   /* ── Año ── */
   var y = $('#year'); if (y) y.textContent = new Date().getFullYear();
 })();

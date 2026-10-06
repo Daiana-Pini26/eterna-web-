@@ -365,7 +365,28 @@
     <p class="eyebrow nude reveal">Agenda selecta</p>
     <p class="agenda-text it reveal">Trabajamos con un número limitado de eventos por temporada.</p>
     <p class="agenda-sub reveal"><b>Eterna viaja:</b> cubrimos eventos en toda la provincia y la región.</p>
-    <a class="btn reveal" href="https://wa.me/5493777593938" data-wa="general" target="_blank" rel="noopener">Consultar fecha</a>
+    <a class="btn reveal" id="agendaBtn" href="https://wa.me/5493777593938" data-wa="general" target="_blank" rel="noopener">Consultar fecha</a>
+
+    <!-- Selector de fecha: lo activa js/main.js (sin JS queda el botón de arriba) -->
+    <form class="fecha reveal" id="fecha" hidden onsubmit="return false">
+      <p class="fecha-title it">Elegí tu fecha</p>
+      <div class="seg" role="radiogroup" aria-label="Tipo de evento">
+        <button type="button" role="radio" aria-checked="true" data-tipo="xv" class="is-on">XV Años</button>
+        <button type="button" role="radio" aria-checked="false" data-tipo="boda">Boda</button>
+        <button type="button" role="radio" aria-checked="false" data-tipo="general">Otro evento</button>
+      </div>
+      <div class="wheels" aria-label="Fecha del evento">
+        <div class="wheel-band" aria-hidden="true"></div>
+        <div class="wheel w-day" id="wDay" role="listbox" tabindex="0" aria-label="Día"></div>
+        <div class="wheel w-month" id="wMonth" role="listbox" tabindex="0" aria-label="Mes"></div>
+        <div class="wheel w-year" id="wYear" role="listbox" tabindex="0" aria-label="Año"></div>
+      </div>
+      <p class="fecha-hint">Deslizá cada columna para elegir</p>
+      <p class="fecha-sum it" id="fechaSum" aria-live="polite"></p>
+      <label class="fecha-city"><span>Ciudad</span><input type="text" id="fechaCity" placeholder="Goya" autocomplete="address-level2" maxlength="40"></label>
+      <a class="btn big" id="fechaGo" href="https://wa.me/5493777593938" target="_blank" rel="noopener">Consultar esta fecha</a>
+      <p class="fecha-note">Se abre WhatsApp con tu consulta lista para enviar.</p>
+    </form>
   </div>
 </section>
 
