@@ -1,0 +1,77 @@
+ETERNA · Cómo editar y publicar la web
+========================================
+
+ESTRUCTURA
+  index.html        Toda la página (textos, secciones)
+  css/styles.css    Diseño y colores
+  js/config.js      WhatsApp, link de Vimeo y mensajes precargados  <-- lo más editado
+  js/main.js        Comportamiento (no hace falta tocarlo)
+  img/              Fotos (WebP)
+  video/            Videos (MP4)
+  favicon.svg       Símbolo de Eterna
+
+1) CÓMO REEMPLAZAR LAS FOTOS
+  Mientras falten archivos, la web muestra bloques tonales con el nombre de la imagen esperada.
+  Solo hay que guardar tus fotos en /img con EXACTAMENTE estos nombres (formato WebP):
+
+  Portfolio (cada foto en dos tamaños):
+    xv-01.webp ... xv-08.webp         -> 1600 px de ancho (pantalla completa / lightbox)
+    xv-01-800.webp ... xv-08-800.webp -> 800 px de ancho (versión liviana para celular)
+    boda-01.webp ... boda-06.webp     y     boda-01-800.webp ... boda-06-800.webp
+    (las fotos "anchas" son xv-01, boda-03 y xv-06: usar orientación horizontal 3:2;
+     el resto, vertical 4:5)
+
+  Otras imágenes:
+    hero-poster.webp   1920x1080  Imagen mientras carga el video del inicio
+    puerta-xv.webp     1000x1250  Bloque XV Años
+    puerta-boda.webp   1000x1250  Bloque Bodas
+    film-poster.webp   1600x900   Portada del film (Línea REC)
+    reel-01.webp ... reel-05.webp 720x1280  Portadas de los reels (vertical)
+    batas.webp         1200x900   Foto de las batas bordadas
+    cierre.webp        1920x1080  Foto de fondo del cierre
+    og-eterna.jpg      1200x630   Imagen al compartir (ya incluida con el logo; podés reemplazarla por una foto + logo)
+
+  Para convertir a WebP gratis: https://squoosh.app (calidad 75-80). Cada foto debería pesar
+  menos de ~250 KB (la de 800 px, menos de ~100 KB).
+
+  Para cambiar el texto alternativo (alt) de una foto, editá el atributo alt en index.html.
+  Para sumar o quitar fotos: copiá o borrá una línea <button class="tile ..."> en la sección
+  PORTFOLIO. Se recomienda mantener entre 12 y 18.
+
+2) CÓMO PEGAR LOS VIDEOS
+  Video del inicio (loop, sin sonido): guardalo como  video/hero.mp4
+    (1080p, 10-20 segundos, menos de 8 MB, sin audio).
+  Reels: video/reel-01.mp4 ... reel-05.mp4  (vertical 9:16, 720x1280, 5-15 s, menos de 5 MB).
+  Para sumar un reel, copiá un bloque <div class="phone"> en index.html.
+
+  FILM DE VIMEO:
+    1. Subí el film a Vimeo. En "Configuración > Privacidad" elegí "Oculto" (unlisted)
+       y, en "Dónde se puede incrustar", restringilo a tu dominio.
+    2. Copiá el número del link. Ejemplo: https://vimeo.com/123456789  ->  123456789
+       Si el link es oculto y tiene un código extra (vimeo.com/123456789/abcdef1234), poné
+       "123456789?h=abcdef1234".
+    3. Abrí js/config.js y pegalo en:   vimeoId: "123456789",
+    El player se muestra sin título ni autor y con la portada film-poster.webp. Los videos
+    "sugeridos" al final los controla Vimeo; con una cuenta Vimeo de pago (Plus o superior)
+    se pueden quitar del todo desde la configuración del player.
+
+3) TEXTOS, WHATSAPP Y TESTIMONIOS
+  - Número y mensajes: js/config.js (no hay que tocar los botones uno por uno).
+  - Testimonios: sección TESTIMONIOS en index.html. Los actuales son de ejemplo:
+    reemplazarlos por citas reales de clientes, con su permiso.
+  - Dominio: en index.html reemplazá  https://www.SU-DOMINIO.com.ar  por tu dominio real
+    (canonical, Open Graph y datos estructurados).
+
+4) CÓMO PUBLICAR EN HOSTINGER
+  1. hPanel > Sitios web > tu dominio > Administrador de archivos.
+  2. Entrá a la carpeta public_html.
+  3. Subí TODO el contenido de la carpeta "eterna" (index.html, css, js, img, video, favicon.svg)
+     de modo que index.html quede directamente dentro de public_html.
+  4. Activá el SSL gratuito en hPanel (Seguridad > SSL) para que cargue con https.
+  Cualquier otro hosting estático (Netlify, Vercel, GitHub Pages) funciona igual: se sube la carpeta.
+
+5) ANTES DE PUBLICAR
+  - Probá la web desde tu celular.
+  - Verificá que el mensaje de WhatsApp se abra con el texto correcto.
+  - Revisá que no queden bloques con nombre de archivo a la vista (son imágenes que faltan).
+  - Pegá el link en https://developers.facebook.com/tools/debug/ para refrescar la vista previa.
