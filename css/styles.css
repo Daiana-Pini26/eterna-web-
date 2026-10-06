@@ -162,6 +162,21 @@ html:not(.js) .loader{display:none}
 .lb-close{position:absolute;top:12px;right:14px;font-size:.7rem;letter-spacing:.34em;text-transform:uppercase}
 @media (min-width:900px){.lightbox{padding:60px 30px 30px;gap:24px}}
 
+/* INSTAGRAM */
+.ig{padding:0 0 clamp(40px,7vw,90px)}
+.h-title.handle{text-transform:none;letter-spacing:.14em;font-size:clamp(.9rem,4.4vw,2rem);overflow-wrap:anywhere}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.ig-tile{aspect-ratio:1/1;display:block}
+.ig-tile img{transition:transform 1.4s var(--ease),opacity 1s}
+.js .ig-tile img{opacity:0}
+.js .ig-tile img.is-loaded{opacity:1}
+.ig-tile:hover img{transform:scale(1.05)}
+.ig-more{text-align:center;margin-top:40px}
+@media (min-width:900px){.ig-grid{grid-template-columns:repeat(6,1fr);gap:8px}}
+
+.cierre-tel{font-size:.9rem;letter-spacing:.14em;color:var(--hueso);line-height:2;margin-top:-14px}
+.cierre-tel a{font-size:1.15rem;letter-spacing:.2em;border-bottom:1px solid var(--nude);padding-bottom:2px}
+
 /* LÍNEA REC */
 .rec{padding:clamp(60px,10vw,140px) 0;background:var(--carbon-2)}
 .rec-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--rec);animation:blink 2.6s ease-in-out infinite;flex:none}

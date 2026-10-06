@@ -9,6 +9,11 @@ window.ETERNA = {
      Si el video es "oculto" (unlisted), agregá el hash: "123456789?h=abcdef1234"  */
   vimeoId: "",
 
+  /* INSTAGRAM ─ Links de las 6 publicaciones a mostrar (en el mismo orden que ig-01 ... ig-06).
+     Ejemplo: "https://www.instagram.com/p/AbC123xyz/"  (en Instagram: ··· > Copiar enlace)
+     Si dejás uno vacío, esa miniatura lleva al perfil. */
+  instagramPosts: ["", "", "", "", "", ""],
+
   /* Mensajes precargados de WhatsApp */
   mensajes: {
     general: "Hola Eterna, quiero consultar disponibilidad para mi evento. Fecha: __ Ciudad: __",

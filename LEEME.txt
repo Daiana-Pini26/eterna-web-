@@ -75,3 +75,11 @@ ESTRUCTURA
   - Verificá que el mensaje de WhatsApp se abra con el texto correcto.
   - Revisá que no queden bloques con nombre de archivo a la vista (son imágenes que faltan).
   - Pegá el link en https://developers.facebook.com/tools/debug/ para refrescar la vista previa.
+
+6) INSTAGRAM Y TESTIMONIOS (agregado)
+  - Miniaturas de Instagram: guardá 6 capturas cuadradas (800x800) como img/ig-01.webp ... ig-06.webp.
+    Una web estática no puede traer el feed sola (Instagram no lo permite sin una app aprobada),
+    así que se actualizan a mano: cambiás las 6 imágenes y pegás los links de cada publicación en
+    js/config.js > instagramPosts. Si dejás un link vacío, la miniatura abre el perfil.
+  - Testimonios: los 3 actuales y sus nombres (Martina Benítez, Lucía y Tomás, Silvia Romero) son
+    INVENTADOS, de ejemplo. Reemplazarlos por reales antes de promocionar la web.

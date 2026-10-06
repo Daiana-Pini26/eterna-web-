@@ -16,6 +16,12 @@
   }
   $$('[data-wa]').forEach(function (a) { a.href = waLink(a.getAttribute('data-wa')); });
 
+  /* ── Instagram: enlaces a cada publicación ── */
+  $$('[data-ig]').forEach(function (a) {
+    var u = (CFG.instagramPosts || [])[parseInt(a.getAttribute('data-ig'), 10)];
+    if (u) a.href = u;
+  });
+
   /* ── Imágenes: placeholder elegante si falta el archivo ── */
   function markMissing(img) {
     var box = img.closest('.ph');
