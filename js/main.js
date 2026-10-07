@@ -27,11 +27,23 @@
     var box = img.closest('.ph');
     if (box) box.classList.add('is-missing');
   }
+  function markLoaded(img) {
+    img.classList.add('is-loaded');
+    var box = img.closest('.ph'); if (box) box.classList.remove('is-missing');
+  }
   $$('img').forEach(function (img) {
-    if (img.complete) { img.naturalWidth ? img.classList.add('is-loaded') : markMissing(img); }
-    img.addEventListener('load', function () { img.classList.add('is-loaded'); });
+    // En Safari/iOS una imagen "lazy" aún sin pedir figura como complete con ancho 0:
+    // solo se la da por faltante si NO es lazy; las lazy se resuelven por sus eventos.
+    if (img.complete && img.naturalWidth) markLoaded(img);
+    else if (img.complete && img.loading !== 'lazy') markMissing(img);
+    img.addEventListener('load', function () { markLoaded(img); });
     img.addEventListener('error', function () { markMissing(img); });
   });
+  // Red de seguridad: si algún navegador no dispara 'load', se muestran las ya descargadas
+  var sweeps = 0, sweep = setInterval(function () {
+    $$('img:not(.is-loaded)').forEach(function (i) { if (i.complete && i.naturalWidth) markLoaded(i); });
+    if (++sweeps > 40) clearInterval(sweep);
+  }, 1500);
   $$('video[poster]').forEach(function (v) {
     var p = new Image();
     p.onerror = function () {
