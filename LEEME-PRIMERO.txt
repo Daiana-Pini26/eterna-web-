@@ -1,0 +1,20 @@
+ETERNA WEB · carpeta del proyecto
+=================================
+Esta carpeta es independiente de "MI WEB DEL ESTUDIO". Tiene todo lo necesario para la web de Eterna.
+
+  index.html, css/, js/      La web (publicar todo esto)
+  img/, video/               Fotos y videos ya convertidos (lo que se publica)
+  originales/                Tus fotos y videos SIN convertir (no se publican ni se suben a Git)
+    fotos/  reels/  hero/
+  tools/serve.ps1            Servidor para ver la web en tu PC
+  tools/convertir.ps1        Convierte originales -> formatos web
+  LEEME.txt                  Guía completa (nombres de archivos, Vimeo, Hostinger)
+
+FLUJO DE TRABAJO
+ 1. Poné tus originales en originales\fotos (o reels / hero), con el nombre que usa la web.
+    Ejemplos:  fotos\xv-02.jpg   reels\reel-04.mov   hero\hero.mov
+ 2. Doble clic derecho en tools\convertir.ps1 > "Ejecutar con PowerShell"
+    (o:  powershell -ExecutionPolicy Bypass -File tools\convertir.ps1 ). Requiere FFmpeg, que ya está instalado en esta PC.
+ 3. Para verla:  powershell -ExecutionPolicy Bypass -File tools\serve.ps1
+    y abrí http://localhost:8770/
+ 4. Para publicar: subí index.html, css, js, img, video y favicon.svg a public_html en Hostinger.

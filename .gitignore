@@ -1,0 +1,5 @@
+# Originales pesados (fotos y videos sin convertir): quedan solo en tu PC
+originales/*/*
+!originales/*/.gitkeep
+Thumbs.db
+.DS_Store
