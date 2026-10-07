@@ -59,7 +59,7 @@ ESTRUCTURA
   - Número y mensajes: js/config.js (no hay que tocar los botones uno por uno).
   - Testimonios: sección TESTIMONIOS en index.html. Los actuales son de ejemplo:
     reemplazarlos por citas reales de clientes, con su permiso.
-  - Dominio: en index.html reemplazá  https://www.SU-DOMINIO.com.ar  por tu dominio real
+  - Dominio: en index.html reemplazá  https://eterna-web-coral.vercel.app  por tu dominio real (cuando lo tengas)
     (canonical, Open Graph y datos estructurados).
 
 4) CÓMO PUBLICAR EN HOSTINGER
