@@ -131,7 +131,7 @@ html:not(.js) .loader{display:none}
 
 /* PORTFOLIO */
 .portfolio{padding:clamp(60px,10vw,140px) 0}
-.filters{display:flex;gap:26px;margin:-18px 0 36px}
+.filters{display:flex;flex-wrap:wrap;gap:4px 22px;margin:-18px 0 36px}
 .filter{font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--hueso-dim);padding:.6em 0;border-bottom:1px solid transparent;transition:color .5s,border-color .5s}
 .filter:hover{color:var(--hueso)}
 .filter.is-on{color:var(--nude);border-color:var(--nude)}

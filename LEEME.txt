@@ -18,6 +18,7 @@ ESTRUCTURA
     xv-01.webp ... xv-08.webp         -> 1600 px de ancho (pantalla completa / lightbox)
     xv-01-800.webp ... xv-08-800.webp -> 800 px de ancho (versión liviana para celular)
     boda-01.webp ... boda-06.webp     y     boda-01-800.webp ... boda-06-800.webp
+    otros-01.webp ... otros-03.webp   (filtro "Otros eventos")
     (las fotos "anchas" son xv-01, boda-03 y xv-06: usar orientación horizontal 3:2;
      el resto, vertical 4:5)
 
