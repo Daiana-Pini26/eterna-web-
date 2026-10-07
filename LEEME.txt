@@ -15,8 +15,8 @@ ESTRUCTURA
   Solo hay que guardar tus fotos en /img con EXACTAMENTE estos nombres (formato WebP):
 
   Portfolio (cada foto en dos tamaños):
-    xv-01.webp ... xv-13.webp         -> 1600 px de ancho (pantalla completa / lightbox)
-    xv-01-800.webp ... xv-13-800.webp -> 800 px de ancho (versión liviana para celular)
+    xv-01.webp ... xv-12.webp         -> 1600 px de ancho (pantalla completa / lightbox)
+    xv-01-800.webp ... xv-12-800.webp -> 800 px de ancho (versión liviana para celular)
     boda-01.webp ... boda-09.webp     y     boda-01-800.webp ... boda-09-800.webp
     otros-01.webp ... otros-03.webp   (filtro "Otros eventos")
     (las fotos "anchas" son xv-01, xv-06, boda-01, boda-03 y boda-06: usar orientación horizontal 3:2;

@@ -40,7 +40,7 @@ section{position:relative}
 .ph{position:relative;overflow:hidden;background:linear-gradient(155deg,#2b2423,#1f1c1b 55%,#2a2322)}
 .ph>img,.ph>video{width:100%;height:100%;object-fit:cover}
 .ph.is-missing>img{display:none}
-.ph.is-missing::after{content:attr(data-ph);position:absolute;inset:0;display:grid;place-items:center;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(243,240,233,.28);text-align:center;padding:12px}
+.ph.is-missing::after{content:attr(data-ph);position:absolute;inset:0;display:none;place-items:center;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(243,240,233,.28);text-align:center;padding:12px}
 
 /* Botones */
 .btn{display:inline-block;padding:1.05em 2.2em;border:1px solid var(--hueso);font-size:.76rem;letter-spacing:.34em;text-transform:uppercase;font-weight:400;transition:background .6s var(--ease),color .6s var(--ease),border-color .6s var(--ease)}
@@ -341,3 +341,6 @@ details p{padding:0 0 28px;color:var(--hueso-dim);max-width:62ch;animation:fade 
   .rec-dot{animation:none}
   .scroll-hint i{animation:none}
 }
+html.dev .ph.is-missing::after{display:grid}
+.ig[hidden],.film[hidden],.bata-img[hidden],.ig-tile[hidden]{display:none}
+.sep[hidden]{display:none}

@@ -34,9 +34,34 @@
   });
   $$('video[poster]').forEach(function (v) {
     var p = new Image();
-    p.onerror = function () { var b = v.closest('.ph'); if (b) b.classList.add('is-missing'); };
+    p.onerror = function () {
+      var ph = v.closest('.phone');
+      if (ph) { ph.remove(); return; } // reel sin material: se quita del carrusel
+      var b = v.closest('.ph'); if (b) b.classList.add('is-missing');
+    };
     p.src = v.getAttribute('poster');
   });
+
+  /* ── Lo que todavía no tiene material no se muestra al público ── */
+  if (/[?&]dev\b/.test(location.search)) document.documentElement.classList.add('dev'); // ?dev muestra los espacios vacíos
+  function probe(url, bad) { var p = new Image(); p.onerror = bad; p.src = url; }
+  (function () {
+    var ig = $$('.ig-tile'), fails = 0;
+    ig.forEach(function (t) {
+      probe($('img', t).getAttribute('src'), function () {
+        t.hidden = true; fails++;
+        if (fails === ig.length) { // ninguna miniatura: se oculta toda la sección
+          var s = $('#instagram'), sep = s.nextElementSibling;
+          s.hidden = true; if (sep && sep.classList.contains('sep')) sep.hidden = true;
+        }
+      });
+    });
+    var film = $('#film'); if (film && !CFG.vimeoId) film.hidden = true;
+    var bi = $('.bata-img img');
+    if (bi) probe(bi.getAttribute('src'), function () {
+      $('.bata-img').hidden = true; $('.bata').style.gridTemplateColumns = '1fr';
+    });
+  })();
 
   /* ── Pantalla de carga ── */
   var loader = $('#loader'), hero = $('.hero');
