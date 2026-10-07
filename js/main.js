@@ -68,7 +68,7 @@
         }
       });
     });
-    var film = $('#film'); if (film && !CFG.vimeoId) film.hidden = true;
+    var film = $('#film'); if (film && !CFG.vimeoId && !film.getAttribute('data-local')) { film.hidden = true; var cap = $('.film-cap'); if (cap) cap.hidden = true; }
     var bi = $('.bata-img img');
     if (bi) probe(bi.getAttribute('src'), function () {
       $('.bata-img').hidden = true; $('.bata').style.gridTemplateColumns = '1fr';
@@ -205,26 +205,30 @@
     if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
   });
 
-  /* ── Film de Vimeo (se carga solo al tocar play) ── */
+  /* ── Film: Vimeo si hay enlace; si no, el video de muestra propio (se carga solo al tocar play) ── */
   var filmPlay = $('#filmPlay');
   filmPlay.addEventListener('click', function () {
     var frame = filmPlay.parentElement;
-    if (!CFG.vimeoId) {
-      if (!$('.film-msg', frame)) {
-        var m = document.createElement('p'); m.className = 'film-msg';
-        m.textContent = 'El film estará disponible muy pronto.'; frame.appendChild(m);
-      }
-      return;
+    var local = $('#film').getAttribute('data-local');
+    if (CFG.vimeoId) {
+      var id = String(CFG.vimeoId), sep = id.indexOf('?') > -1 ? '&' : '?';
+      var ifr = document.createElement('iframe');
+      ifr.src = 'https://player.vimeo.com/video/' + id + sep +
+        'autoplay=1&title=0&byline=0&portrait=0&badge=0&dnt=1&color=D9282A';
+      ifr.allow = 'autoplay; fullscreen; picture-in-picture';
+      ifr.allowFullscreen = true;
+      ifr.title = 'Film de evento Eterna';
+      frame.appendChild(ifr);
+      filmPlay.remove();
+    } else if (local) {
+      var vid = document.createElement('video');
+      vid.src = local; vid.controls = true; vid.autoplay = true; vid.playsInline = true;
+      vid.setAttribute('controlslist', 'nodownload'); vid.preload = 'auto';
+      vid.setAttribute('aria-label', 'Muestra de film Eterna');
+      vid.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;background:#000;object-fit:contain';
+      frame.appendChild(vid);
+      filmPlay.remove();
     }
-    var id = String(CFG.vimeoId), sep = id.indexOf('?') > -1 ? '&' : '?';
-    var ifr = document.createElement('iframe');
-    ifr.src = 'https://player.vimeo.com/video/' + id + sep +
-      'autoplay=1&title=0&byline=0&portrait=0&badge=0&dnt=1&color=D9282A';
-    ifr.allow = 'autoplay; fullscreen; picture-in-picture';
-    ifr.allowFullscreen = true;
-    ifr.title = 'Film de evento Eterna';
-    frame.appendChild(ifr);
-    filmPlay.remove();
   });
 
   /* ── Reels: reproducen al pasar el mouse o al tocar ── */

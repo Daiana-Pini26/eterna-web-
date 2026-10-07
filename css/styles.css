@@ -344,3 +344,5 @@ details p{padding:0 0 28px;color:var(--hueso-dim);max-width:62ch;animation:fade 
 html.dev .ph.is-missing::after{display:grid}
 .ig[hidden],.film[hidden],.bata-img[hidden],.ig-tile[hidden]{display:none}
 .sep[hidden]{display:none}
+.film-cap{text-align:center;color:var(--hueso-dim);font-size:1.15rem;margin-top:14px}
+.film-cap[hidden]{display:none}
