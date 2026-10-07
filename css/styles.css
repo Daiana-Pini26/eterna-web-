@@ -221,10 +221,10 @@ html:not(.js) .loader{display:none}
   .pillar+.pillar{padding-left:30px;border-left:1px solid var(--linea)}
 }
 .bata{display:grid;gap:30px;margin:clamp(70px,10vw,130px) 0;align-items:center}
-.bata-img{aspect-ratio:4/3}
+.bata-img{aspect-ratio:4/5;width:100%;max-width:520px;margin-inline:auto}
 .bata-img img{transform:scale(1.08)}
 .bata-quote{font-size:clamp(1.6rem,4.4vw,2.3rem);line-height:1.4;margin-top:16px}
-@media (min-width:900px){.bata{grid-template-columns:1.2fr 1fr;gap:80px}}
+@media (min-width:900px){.bata{grid-template-columns:1fr 1fr;gap:80px}}
 .proc-title{font-size:clamp(1.5rem,4vw,2rem);text-align:center;margin-bottom:46px;color:var(--hueso-dim)}
 .process{position:relative;display:grid;gap:30px;padding-left:34px;counter-reset:x}
 .process::before,.process::after{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--linea)}
